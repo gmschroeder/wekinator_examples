@@ -1,35 +1,34 @@
-#N canvas 492 166 745 419 10;
+#N canvas 492 166 568 419 10;
 #X declare -lib oscx;
 #X text -256 -12 This patch sends 3 inputs to wekinator on port 6448
 \, using message /wek/inputs;
-#X text -253 83 Use these sliders to change input values.;
-#X obj 124 29 tgl 15 0 \$0-random-toggle empty empty 17 7 0 10 -262144
+#X obj -71 62 tgl 15 0 \$0-random-toggle empty empty 17 7 0 10 -262144
 -1 -1 0 1;
 #X obj -251 65 tgl 15 0 \$0-sliders-on-off \$0-loadbang empty 17 7
 0 10 -262144 -1 -1 0 1;
 #X text -256 33 click here to turn the sliders on/off;
-#X text 153 123 Either way \, watch the Pd console.;
-#N canvas 331 364 450 300 \$0-sliderguts 0;
-#X msg -210 114 connect localhost 6448;
-#X obj -210 94 loadbang;
-#X obj -221 350 sendOSC;
-#X obj -223 53 import oscx;
-#X msg -222 73 disconnect;
-#X obj -174 189 r \$0-lslider;
-#X obj -156 227 r \$0-mslider;
-#X obj -127 265 r \$0-rslider;
-#X obj -170 350 print;
-#X msg -198 323 send /wek/inputs \$1 \$2 \$3;
-#X obj -184 304 pack f f f;
-#X obj -198 134 r \$0-random-values;
-#X msg -63 109 \; pd dsp 1;
-#X obj -127 285 + 0.0001;
-#X obj -156 246 + 0.0001;
-#X obj -174 208 + 0.0001;
-#X obj -188 153 tgl 15 0 empty \$0-sliders-on-off empty 17 7 0 10 -262144
+#X text -74 116 Either way \, watch the Pd console.;
+#N canvas 329 365 450 300 \$0-sliderguts 0;
+#X msg -210 -26 connect localhost 6448;
+#X obj -210 -46 loadbang;
+#X obj -221 210 sendOSC;
+#X obj -223 -87 import oscx;
+#X msg -222 -67 disconnect;
+#X obj -174 49 r \$0-lslider;
+#X obj -156 87 r \$0-mslider;
+#X obj -127 125 r \$0-rslider;
+#X obj -170 210 print;
+#X msg -198 183 send /wek/inputs \$1 \$2 \$3;
+#X obj -184 164 pack f f f;
+#X obj -198 -6 r \$0-random-values;
+#X msg -63 -31 \; pd dsp 1;
+#X obj -127 145 + 0.0001;
+#X obj -156 106 + 0.0001;
+#X obj -174 68 + 0.0001;
+#X obj -188 13 tgl 15 0 empty \$0-sliders-on-off empty 17 7 0 10 -262144
 -1 -1 0 1;
-#X obj -188 170 metro 12;
-#X obj -147 94 s \$0-loadbang;
+#X obj -188 30 metro 12;
+#X obj -147 -46 s \$0-loadbang;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;
 #X connect 1 0 12 0;
@@ -48,14 +47,13 @@
 #X connect 15 0 10 0;
 #X connect 16 0 17 0;
 #X connect 17 0 10 0;
-#X restore -248 248 pd \$0-sliderguts;
-#X obj -248 107 vsl 15 128 0 127 0 0 \$0-lslider empty empty 0 -9 0
+#X restore -79 229 pd \$0-sliderguts;
+#X obj -248 117 vsl 45 128 0 127 0 0 \$0-lslider empty empty 0 -9 0
 10 -262144 -1 -1 9800 0;
-#X obj -224 107 vsl 15 128 0 127 0 0 \$0-mslider empty empty 0 -9 0
-10 -262144 -1 -1 7800 1;
-#X obj -199 107 vsl 15 128 0 127 0 0 \$0-rslider empty empty 0 -9 0
-10 -262144 -1 -1 4100 1;
-#X text 140 24 Click here to send random input values;
+#X obj -194 117 vsl 45 128 0 127 0 0 \$0-mslider empty empty 0 -9 0
+10 -99865 -1 -1 7800 1;
+#X obj -139 117 vsl 45 128 0 127 0 0 \$0-rslider empty empty 0 -9 0
+10 -191407 -1 -1 4100 1;
 #N canvas 335 303 450 300 randomguts 0;
 #X obj 84 144 noise~;
 #X obj 84 163 unsig~;
@@ -84,4 +82,6 @@
 #X connect 10 0 12 0;
 #X connect 11 0 10 1;
 #X connect 12 0 13 0;
-#X restore 30 191 pd randomguts;
+#X restore 26 230 pd randomguts;
+#X text -253 83 Use these sliders to change input values.;
+#X text -75 30 Click here to send random input values;
