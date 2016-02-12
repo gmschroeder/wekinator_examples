@@ -1,22 +1,22 @@
-#N canvas 498 163 745 419 10;
+#N canvas 492 166 745 419 10;
 #X declare -lib oscx;
-#X msg -210 94 connect localhost 6448;
-#X obj -210 74 loadbang;
+#X msg -210 107 connect localhost 6448;
+#X obj -210 87 loadbang;
 #X obj 10 66 vsl 15 128 0 127 0 0 \$0-lslider empty empty 0 -9 0 10
--262144 -1 -1 3450 1;
+-262144 -1 -1 3800 0;
 #X obj 34 66 vsl 15 128 0 127 0 0 \$0-mslider empty empty 0 -9 0 10
--262144 -1 -1 10750 1;
+-262144 -1 -1 3800 1;
 #X obj 59 66 vsl 15 128 0 127 0 0 \$0-rslider empty empty 0 -9 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 6700 1;
 #X text -229 -8 This patch sends 3 inputs to wekinator on port 6448
 \, using message /wek/inputs;
-#X text -85 36 Use these sliders to change input values.;
-#X obj -221 250 sendOSC;
-#X obj -223 23 import oscx;
-#X msg -222 53 disconnect;
-#X obj -184 134 r \$0-lslider;
-#X obj -156 155 r \$0-mslider;
-#X obj -127 175 r \$0-rslider;
+#X text -85 39 Use these sliders to change input values.;
+#X obj -221 343 sendOSC;
+#X obj -223 46 import oscx;
+#X msg -222 66 disconnect;
+#X obj -174 182 r \$0-lslider;
+#X obj -156 220 r \$0-mslider;
+#X obj -127 258 r \$0-rslider;
 #X obj 154 303 noise~;
 #X obj 154 322 unsig~;
 #X obj 154 342 expr (1 + $f1) * 63.5 * $f2;
@@ -33,22 +33,28 @@
 #X obj 256 206 r \$0-random-toggle;
 #X obj 97 362 pack f f f;
 #X obj 97 383 s \$0-random-values;
-#X obj -170 250 print;
-#X msg -198 223 send /wek/inputs \$1 \$2 \$3;
-#X obj -184 198 pack f f f;
-#X obj -176 178 t b;
-#X obj -197 115 r \$0-random-values;
+#X obj -170 343 print;
+#X msg -198 316 send /wek/inputs \$1 \$2 \$3;
+#X obj -184 297 pack f f f;
+#X obj -198 127 r \$0-random-values;
 #X text 85 70 Click this checkbox tosend random input values;
 #X text 88 127 ... or both if you feel sassy. :-)Either way \, watch
 the Pd console.;
+#X msg -63 102 \; pd dsp 1;
+#X obj -127 278 + 0.0001;
+#X obj -156 239 + 0.0001;
+#X obj -174 201 + 0.0001;
+#X obj -188 146 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj -188 163 metro 12;
 #X connect 0 0 7 0;
 #X connect 1 0 0 0;
+#X connect 1 0 34 0;
+#X connect 1 0 38 0;
 #X connect 9 0 7 0;
-#X connect 10 0 30 0;
-#X connect 11 0 30 1;
-#X connect 11 0 31 0;
-#X connect 12 0 30 2;
-#X connect 12 0 31 0;
+#X connect 10 0 37 0;
+#X connect 11 0 36 0;
+#X connect 12 0 35 0;
 #X connect 13 0 14 0;
 #X connect 14 0 15 0;
 #X connect 15 0 26 2;
@@ -65,5 +71,9 @@ the Pd console.;
 #X connect 29 0 7 0;
 #X connect 29 0 28 0;
 #X connect 30 0 29 0;
-#X connect 31 0 30 0;
-#X connect 32 0 29 0;
+#X connect 31 0 29 0;
+#X connect 35 0 30 2;
+#X connect 36 0 30 1;
+#X connect 37 0 30 0;
+#X connect 38 0 39 0;
+#X connect 39 0 30 0;
